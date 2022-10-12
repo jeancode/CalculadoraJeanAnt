@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--incluye libreria de jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+
+
+            function processMath(cont){
+                try{
+                    
+                    //filtrar X por *
+                    var cont = cont.replace(/X/g, "*");
+
+                    var r =  eval(cont);
+
+                    return r;
+
+                }catch(e){
+                    return "Error en la expresión";
+                }
+            }
+
+
+            var content = "";
+            
+            $(".BotonCal").click(function(){
+               
+                var boton = $(this).html();
+
+                if(boton.indexOf("=") != -1){
+
+                    var resuldiv  = $("#Result").html();
+
+                    var resul = processMath(resuldiv);
+
+                    $("#Result").html(resul);
+                    
+                }else if(boton.indexOf("C") != -1){
+
+                    $("#Result").html("");
+                    content = "";
+
+                }else if(boton.indexOf("%") != -1 ){
+
+                    var resuldiv  = $("#Result").html();
+
+                    var resul = processMath(resuldiv);
+
+                    var resul = resul / 100;
+
+                    $("#Result").html(resul);
+
+                }else if(boton.indexOf("+/-") != -1){
+
+                    var resuldiv  = $("#Result").html();
+
+                    var resul = processMath(resuldiv);
+
+                    var resul = resul * -1;
+
+                    $("#Result").html(resul);
+                    
+
+                }else{
+                    
+                    content += boton;
+
+                    $("#Result").html(content);
+
+                }
+
+
+
+            });
+
+
+
+
+
+        });
+
+    </script>
+    <style>
+        body{
+            margin: 0px;
+        }
+        #background{
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,rgb(186, 123, 76),rgb(78, 91, 236));
+            position: fixed;
+
+        }
+
+        #contenido{
+            width:100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #Calculadora{
+            
+            width: 400px;
+            height: 600px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.738);
+            
+        }
+        #Display{
+            width:100%;
+            height:200px;
+            background:black;
+            color: white;
+ 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            position: relative;
+            
+        }
+        #Result{
+            position: absolute;
+            right: 10px;
+            
+            padding-left: 10px;
+            padding-right: 10px;
+            overflow: auto;
+            font-size: 40px;
+        }
+  
+        #BotonesCalculadora{
+            background: rgb(26, 25, 25);
+            width: 100%;
+            height: 400px;
+            display: grid;
+
+        }
+        .BotonCal{
+            width: calc(100% / 4);
+            min-height: calc(100% / 6);
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 1px solid rgb(56, 55, 55);
+            margin:3px;
+            transition: all .5s ease;
+            -webkit-user-select: none;
+        }
+        .BotonCal:hover{
+            background: rgb(24, 228, 251);
+            transition: all .5s ease;
+        }
+        .ContentButtons{
+            display: flex;
+        }
+ 
+    </style>
+
+</head>
+<body>
+
+    <div id="background"></div>
+
+    <div id="contenido">      
+
+        <div id="Calculadora">
+
+            <div id="Display">
+                <div id="Result">Error</div>
+            </div>
+            <div id="BotonesCalculadora">
+                
+                <div class="ContentButtons">
+                    <div class="BotonCal">C</div>
+                    <div class="BotonCal">+/-</div>
+                    <div class="BotonCal">%</div>
+                    <div class="BotonCal">/</div>
+                </div>
+
+                <div class="ContentButtons">
+                    <div class="BotonCal">7</div>
+                    <div class="BotonCal">8</div>
+                    <div class="BotonCal">9</div>
+                    <div class="BotonCal">X</div>
+                </div>
+
+                <div class="ContentButtons">
+
+                    <div class="BotonCal">4</div>
+                    <div class="BotonCal">5</div>
+                    <div class="BotonCal">6</div>
+                    <div class="BotonCal">-</div>
+
+                </div>
+          
+                <div class="ContentButtons">
+
+                    <div class="BotonCal">1</div>
+                    <div class="BotonCal">2</div>
+                    <div class="BotonCal">3</div>
+                    <div class="BotonCal">+</div>
+                </div>
+
+                <div class="ContentButtons">
+
+                    <div class="BotonCal">0</div>
+                    <div class="BotonCal">.</div>
+                    <div class="BotonCal">=</div>
+
+                    <div class="BotonCal">NP</div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    
+    </div>
+
+
+    
+</body>
+</html>
